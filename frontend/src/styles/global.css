@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* GLOBAL BODY */
+
+body {
+  @apply bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200;
+}
+
+
+/* BUTTONS */
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 px-4 py-2 rounded transition;
+}
+
+
+/* INPUTS */
+
+.input-field {
+  @apply w-full border border-gray-300 dark:border-gray-600
+  bg-white dark:bg-gray-800
+  p-2 rounded focus:outline-none;
+}
+
+
+/* CARD */
+
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow p-4 transition hover:shadow-lg;
+}
+
+
+/* PAGE WRAPPER */
+
+.page-container {
+  @apply max-w-7xl mx-auto px-6 py-10;
+}
