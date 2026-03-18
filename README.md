@@ -28,7 +28,7 @@ A modern library management platform built with React, TypeScript, and Tailwind 
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/kartikgarg146/Libronexa-Smart LIbrary Management Platform.git
+git clone https://github.com/kartikgarg146/Libronexa-Smart Library Management Platform.git
 cd libronexa
 npm install
 npm run dev
