@@ -1,4 +1,3 @@
-```txt id="gitignore1"
 node_modules
 dist
 .env
