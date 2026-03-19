@@ -65,3 +65,19 @@ export const loginUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getMe = async (req: Request, res: Response) => {
+  // `protect` middleware attaches the DB user to req.user
+  const user = (req as any).user;
+
+  if (!user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  res.json({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  });
+};

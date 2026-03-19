@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 
 function Register() {
 
@@ -45,10 +44,16 @@ function Register() {
   return (
 
   <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
+    <div className="max-w-md mx-auto pt-10 px-4">
+      <button
+        onClick={() => navigate("/")}
+        className="btn-secondary mb-6 w-fit"
+      >
+        Back to Landing
+      </button>
+    </div>
 
-  <Navbar/>
-
-  <div className="flex justify-center items-center pt-20">
+  <div className="flex justify-center items-center pt-6">
 
   <div className="w-full max-w-md bg-white dark:bg-gray-900 shadow-xl rounded-xl p-8">
 

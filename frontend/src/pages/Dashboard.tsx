@@ -5,11 +5,40 @@ import Navbar from "../components/Navbar";
 function Dashboard(){
 
 const [books,setBooks] = useState<any[]>([]);
+const [userName,setUserName] = useState<string>(
+localStorage.getItem("userName") || ""
+);
 const [search,setSearch] = useState("");
 
 useEffect(()=>{
+fetchUserName();
 fetchBooks();
 },[]);
+
+const fetchUserName = async ()=>{
+
+try{
+
+const token = localStorage.getItem("token");
+if(!token) return;
+
+const res = await axios.get(
+"http://localhost:5000/api/auth/me",
+{
+headers:{
+Authorization:`Bearer ${token}`
+}
+}
+);
+
+setUserName(res.data?.name ?? "");
+localStorage.setItem("userName", res.data?.name ?? "");
+
+}catch(err){
+console.log(err);
+}
+
+};
 
 const fetchBooks = async ()=>{
 
@@ -65,7 +94,7 @@ return(
 <div className="max-w-7xl mx-auto px-6 py-10">
 
 <h1 className="text-3xl font-bold mb-6 dark:text-white">
-Library Books
+Welcome{userName ? ", " + userName : ""}!
 </h1>
 
 
@@ -76,7 +105,7 @@ type="text"
 placeholder="Search books..."
 value={search}
 onChange={(e)=>setSearch(e.target.value)}
-className="w-full md:w-96 mb-8 border rounded px-4 py-2 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+className="w-full md:w-96 mb-8 border rounded px-4 py-2 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
 />
 
 
@@ -88,7 +117,7 @@ className="w-full md:w-96 mb-8 border rounded px-4 py-2 dark:bg-gray-800 dark:bo
 
 <div
 key={book.id}
-className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition"
+className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-6 hover:-translate-y-1 transition"
 >
 
 <img
@@ -110,7 +139,7 @@ Available Copies: {book.availableCopies}
 
 <button
 onClick={()=>requestBook(book.id)}
-className="w-full mt-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+className="w-full mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 rounded hover:from-blue-700 hover:to-indigo-700 transition shadow-sm"
 >
 Request Book
 </button>

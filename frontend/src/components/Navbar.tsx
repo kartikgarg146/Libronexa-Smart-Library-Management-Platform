@@ -34,21 +34,15 @@ function Navbar() {
 
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("userName");
 
     navigate("/login");
 
   };
 
-  const goHome = () => {
-
-    const role = localStorage.getItem("role");
-
-    if(role === "admin"){
-      navigate("/admin");
-    }else{
-      navigate("/dashboard");
-    }
-
+  const goLanding = () => {
+    // Home button must always return to the Landing page.
+    navigate("/");
   };
 
   return (
@@ -81,7 +75,7 @@ function Navbar() {
           dark:text-blue-400
           cursor-pointer
           "
-          onClick={goHome}
+          onClick={goLanding}
         >
           Libronexa
         </h1>
@@ -96,7 +90,7 @@ function Navbar() {
           </button>
 
           <button
-            onClick={goHome}
+            onClick={goLanding}
             className="btn-secondary"
           >
             Home
