@@ -126,8 +126,7 @@ async function main() {
         availableCopies: 3,
         categoryId: programming.id
       }
-    ],
-  });
+      });
 
   console.log("Seed data inserted");
 }
