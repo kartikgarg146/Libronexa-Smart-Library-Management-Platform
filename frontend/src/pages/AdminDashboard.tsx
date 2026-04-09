@@ -67,9 +67,35 @@ function AdminDashboard(){
           "#10b981",
           "#f59e0b",
           "#ef4444"
-        ]
+        ],
+        borderRadius: 12,
+        barThickness: 28
       }
     ]
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: { color: "#94a3b8" }
+      },
+      title: {
+        display: false
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: "#64748b" },
+        grid: { color: "rgba(148,163,184,0.15)" }
+      },
+      y: {
+        ticks: { color: "#64748b" },
+        grid: { color: "rgba(148,163,184,0.15)" }
+      }
+    }
   }
 
   return(
@@ -77,85 +103,76 @@ function AdminDashboard(){
     <>
       <Navbar/>
 
-      <div className="p-6">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto px-6 py-10">
 
-        <h1 className="text-2xl font-bold mb-6">
-          Admin Dashboard
-        </h1>
+          <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <h1 className="text-4xl font-extrabold dark:text-white">Admin Dashboard</h1>
+              <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-2xl">Monitor requests, manage inventory, and see your library analytics with a modern dashboard layout.</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/admin/books" className="rounded-3xl bg-gradient-to-r from-purple-600 to-violet-600 px-5 py-3 text-white shadow-lg shadow-violet-500/20">Manage Books</Link>
+              <Link to="/admin/requests" className="rounded-3xl bg-slate-900 text-white px-5 py-3 shadow-lg shadow-slate-900/10">View Requests</Link>
+              <Link to="/admin/overdue" className="rounded-3xl bg-red-600 text-white px-5 py-3 shadow-lg shadow-red-500/20">Overdue Books</Link>
+            </div>
+          </div>
 
-        {/* Navigation Buttons */}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mb-10">
+            <div className="rounded-[32px] bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 p-6 text-white shadow-2xl border border-white/10">
+              <p className="text-sm uppercase tracking-[0.24em] text-sky-100/80">Total Books</p>
+              <p className="mt-4 text-3xl font-semibold">{stats.totalBooks}</p>
+            </div>
+            <div className="rounded-[32px] bg-emerald-600 p-6 text-white shadow-2xl border border-white/10">
+              <p className="text-sm uppercase tracking-[0.24em] text-emerald-100/80">Users</p>
+              <p className="mt-4 text-3xl font-semibold">{stats.totalUsers}</p>
+            </div>
+            <div className="rounded-[32px] bg-amber-500 p-6 text-white shadow-2xl border border-white/10">
+              <p className="text-sm uppercase tracking-[0.24em] text-amber-100/85">Active Borrows</p>
+              <p className="mt-4 text-3xl font-semibold">{stats.activeBorrows}</p>
+            </div>
+            <div className="rounded-[32px] bg-red-500 p-6 text-white shadow-2xl border border-white/10">
+              <p className="text-sm uppercase tracking-[0.24em] text-red-100/85">Overdue</p>
+              <p className="mt-4 text-3xl font-semibold">{stats.overdueBooks}</p>
+            </div>
+          </div>
 
-        <div className="flex gap-4 mb-8">
+          <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+            <div className="rounded-[32px] bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 p-6 shadow-xl">
+              <div className="mb-6 flex items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Library Insights</h2>
+                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">A quick view of books, users, borrows, and overdue counts.</p>
+                </div>
+              </div>
+              <div className="h-[360px]">
+                <Bar data={data} options={options} />
+              </div>
+            </div>
 
-          <Link
-            to="/admin/books"
-            className="bg-purple-500 text-white px-4 py-2 rounded"
-          >
-            Manage Books
-          </Link>
+            <div className="space-y-6">
+              <div className="rounded-[32px] bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 p-6 shadow-xl">
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Quick Actions</h2>
+                <p className="mt-3 text-gray-600 dark:text-gray-300">Use these shortcuts to manage your library workflows faster.</p>
+                <div className="mt-6 grid gap-3">
+                  <Link to="/admin/books" className="block rounded-3xl border border-slate-200/80 bg-slate-50 px-4 py-3 text-slate-900 transition hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900">View and edit books</Link>
+                  <Link to="/admin/requests" className="block rounded-3xl border border-slate-200/80 bg-slate-50 px-4 py-3 text-slate-900 transition hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900">Review pending requests</Link>
+                  <Link to="/admin/overdue" className="block rounded-3xl border border-slate-200/80 bg-slate-50 px-4 py-3 text-slate-900 transition hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900">Check overdue books</Link>
+                </div>
+              </div>
 
-          <Link
-            to="/admin/requests"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            View Requests
-          </Link>
-
-          <Link
-            to="/admin/overdue"
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Overdue Books
-          </Link>
+              <div className="rounded-[32px] bg-gradient-to-br from-violet-500 to-fuchsia-500 p-6 text-white shadow-2xl border border-white/10">
+                <p className="text-sm uppercase tracking-[0.24em] text-white/80">Admin tip</p>
+                <p className="mt-4 text-lg font-semibold">Keep overdue requests visible to improve turnaround and reduce borrower follow-ups.</p>
+              </div>
+            </div>
+          </div>
 
         </div>
-
-        {/* Stats Cards */}
-
-        <div className="grid grid-cols-4 gap-6 mb-10">
-
-          <div className="bg-blue-500 text-white p-4 rounded">
-            <h2>Total Books</h2>
-            <p className="text-2xl font-bold">
-              {stats.totalBooks}
-            </p>
-          </div>
-
-          <div className="bg-green-500 text-white p-4 rounded">
-            <h2>Users</h2>
-            <p className="text-2xl font-bold">
-              {stats.totalUsers}
-            </p>
-          </div>
-
-          <div className="bg-yellow-500 text-white p-4 rounded">
-            <h2>Active Borrows</h2>
-            <p className="text-2xl font-bold">
-              {stats.activeBorrows}
-            </p>
-          </div>
-
-          <div className="bg-red-500 text-white p-4 rounded">
-            <h2>Overdue</h2>
-            <p className="text-2xl font-bold">
-              {stats.overdueBooks}
-            </p>
-          </div>
-
-        </div>
-
-        {/* Graph */}
-
-        <div className="bg-white p-6 rounded shadow">
-          <Bar data={data}/>
-        </div>
-
       </div>
-
     </>
 
   )
-
 }
 
 export default AdminDashboard;
