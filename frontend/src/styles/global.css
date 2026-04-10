@@ -46,3 +46,10 @@ body {
 .page-container {
   @apply max-w-7xl mx-auto px-6 py-10;
 }
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(24px);
+}
