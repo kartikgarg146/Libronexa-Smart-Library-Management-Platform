@@ -1,8 +1,27 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
 async function main() {
+
+  // ✅ Create Admin
+
+  const hashedPassword = await bcrypt.hash("123456",10);
+
+  await prisma.user.upsert({
+    where: { email: "admin@gmail.com" },
+    update: {},
+    create:{
+      name:"Admin",
+      email:"admin@gmail.com",
+      password: hashedPassword,
+      role:"admin"
+    }
+  });
+
+
+  // ✅ Categories
 
   const programming = await prisma.category.upsert({
     where: { name: "Programming" },
@@ -15,6 +34,9 @@ async function main() {
     update: {},
     create: { name: "English Literature" }
   });
+
+
+  // ✅ Books
 
   await prisma.book.createMany({
     data: [
@@ -126,9 +148,10 @@ async function main() {
         availableCopies: 3,
         categoryId: programming.id
       }
-      });
+    ],
+  });
 
-  console.log("Seed data inserted");
+  console.log("✅ Admin + Categories + Books Seeded");
 }
 
 main()
