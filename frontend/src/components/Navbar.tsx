@@ -44,11 +44,6 @@ function Navbar() {
 
   };
 
-  const goLanding = () => {
-    // Home button must always return to the Landing page.
-    navigate("/");
-  };
-
   return (
 
     <nav className="sticky top-0 z-40 border-b border-white/10 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl shadow-2xl shadow-slate-900/5">
@@ -68,13 +63,6 @@ function Navbar() {
             className="inline-flex items-center rounded-2xl border border-slate-200/80 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-0.5 hover:bg-slate-100 dark:border-slate-700/90 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
           >
             Back
-          </button>
-
-          <button
-            onClick={goLanding}
-            className="inline-flex items-center rounded-2xl border border-slate-200/80 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-0.5 hover:bg-slate-100 dark:border-slate-700/90 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
-          >
-            Home
           </button>
 
           <button
