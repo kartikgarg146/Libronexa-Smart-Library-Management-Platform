@@ -9,6 +9,13 @@ function MyBooks() {
 
   useEffect(()=>{
     fetchHistory();
+
+    const handleFocus = () => fetchHistory();
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   },[])
 
   const fetchHistory = async () => {

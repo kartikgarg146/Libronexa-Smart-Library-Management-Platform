@@ -28,6 +28,13 @@ const Books: React.FC = () => {
 
   useEffect(() => {
     fetchBooks();
+
+    const handleFocus = () => fetchBooks();
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   }, []);
 
   useEffect(() => {

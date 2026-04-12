@@ -47,6 +47,7 @@ model Book {
 model BorrowRequest {
   id        Int      @id @default(autoincrement())
   status    String   @default("pending")
+  type      String   @default("borrow")
   createdAt DateTime @default(now())
 
   userId Int

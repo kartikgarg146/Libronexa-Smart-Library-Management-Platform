@@ -31,6 +31,13 @@ function AdminDashboard(){
 
   useEffect(()=>{
     fetchStats();
+
+    const handleFocus = () => fetchStats();
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   },[])
 
   const fetchStats = async () => {

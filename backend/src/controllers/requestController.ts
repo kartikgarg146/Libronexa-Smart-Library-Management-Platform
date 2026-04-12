@@ -3,12 +3,13 @@ import prisma from "../config/prisma";
 
 export const requestBook = async (req: any, res: Response) => {
   try {
-    const { bookId } = req.body;
+    const { bookId, type } = req.body;
 
     const request = await prisma.borrowRequest.create({
       data: {
         userId: req.user.id,
         bookId: bookId,
+        type: type || 'borrow',
       },
     });
 
@@ -61,6 +62,29 @@ export const approveRequest = async (req: Request, res: Response) => {
     res.json({ message: "Request approved and book issued" });
   } catch (error) {
     res.status(500).json({ message: "Error approving request" });
+  }
+};
+
+export const rejectRequest = async (req: Request, res: Response) => {
+  try {
+    const requestId = Number(req.params.id);
+
+    const request = await prisma.borrowRequest.findUnique({
+      where: { id: requestId },
+    });
+
+    if (!request) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+    await prisma.borrowRequest.update({
+      where: { id: requestId },
+      data: { status: "rejected" },
+    });
+
+    res.json({ message: "Request rejected" });
+  } catch (error) {
+    res.status(500).json({ message: "Error rejecting request" });
   }
 };
 
@@ -117,6 +141,7 @@ export const returnBook = async (req: Request, res: Response) => {
 export const getAllRequests = async (req: Request, res: Response) => {
   try {
     const requests = await prisma.borrowRequest.findMany({
+      orderBy: { createdAt: 'desc' },
       include: {
         user: true,
         book: true,

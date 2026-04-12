@@ -9,7 +9,7 @@ interface Request {
   bookId: string;
   type: 'borrow' | 'return';
   status: 'pending' | 'approved' | 'rejected';
-  requestDate: string;
+  createdAt: string;
   user: {
     name: string;
     email: string;
@@ -29,6 +29,15 @@ const AdminRequests: React.FC = () => {
 
   useEffect(() => {
     fetchRequests();
+
+    const handleFocus = () => fetchRequests();
+    window.addEventListener('focus', handleFocus);
+    const intervalId = window.setInterval(fetchRequests, 10000);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(intervalId);
+    };
   }, []);
 
   const fetchRequests = async () => {
@@ -48,13 +57,14 @@ const AdminRequests: React.FC = () => {
   const handleRequestAction = async (requestId: string, action: 'approve' | 'reject') => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/requests/approve/${requestId}`, {
-        status: action === 'approve' ? 'approved' : 'rejected'
-      }, {
+      const endpoint = action === 'approve'
+        ? `http://localhost:5000/api/requests/approve/${requestId}`
+        : `http://localhost:5000/api/requests/reject/${requestId}`;
+
+      await axios.put(endpoint, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update local state
       setRequests(requests.map(req =>
         req.id === requestId
           ? { ...req, status: action === 'approve' ? 'approved' : 'rejected' }
@@ -182,7 +192,7 @@ const AdminRequests: React.FC = () => {
                       {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
                     </div>
                     <span className="text-gray-300 text-sm">
-                      {new Date(request.requestDate).toLocaleDateString()}
+                      {new Date(request.createdAt).toLocaleDateString()}
                     </span>
                   </div>
 

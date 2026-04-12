@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import prisma from "../config/prisma";
+import { generateToken } from "../utils/generateToken";
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
@@ -32,9 +33,6 @@ export const registerUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-import jwt from "jsonwebtoken";
-import { generateToken } from "../utils/generateToken";
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
