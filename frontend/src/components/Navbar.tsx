@@ -1,33 +1,37 @@
 ﻿import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import logo from "../assets/logo.png";
 
 function Navbar() {
 
   const navigate = useNavigate();
 
+  const [dark, setDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
+
   useEffect(() => {
-
     const savedTheme = localStorage.getItem("theme");
-
     if(savedTheme === "dark"){
       document.documentElement.classList.add("dark");
+      setDark(true);
+    } else {
+      setDark(false);
     }
-
   },[]);
 
   const toggleDark = () => {
-
-    const html = document.documentElement;
-
-    if(html.classList.contains("dark")){
-      html.classList.remove("dark");
-      localStorage.setItem("theme","light");
-    }else{
-      html.classList.add("dark");
-      localStorage.setItem("theme","dark");
+    if (dark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setDark(true);
     }
-
   };
 
   const logout = () => {
@@ -77,7 +81,7 @@ function Navbar() {
             onClick={toggleDark}
             className="inline-flex items-center rounded-2xl border border-slate-200/80 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm shadow-slate-900/5 transition hover:-translate-y-0.5 hover:bg-slate-100 dark:border-slate-700/90 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
           >
-            🌙
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 
           <button
