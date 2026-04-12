@@ -46,7 +46,7 @@ const AdminBooks: React.FC = () => {
   const fetchBooks = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/admin/books', {
+      const response = await axios.get('http://localhost:5000/api/books', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBooks(response.data);
@@ -93,13 +93,13 @@ const AdminBooks: React.FC = () => {
 
       if (editingBook) {
         // Update book
-        await axios.put(`http://localhost:5000/api/admin/books/${editingBook.id}`, formData, {
+        await axios.put(`http://localhost:5000/api/books/${editingBook.id}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Book updated successfully!');
       } else {
         // Add new book
-        await axios.post('http://localhost:5000/api/admin/books', formData, {
+        await axios.post('http://localhost:5000/api/books', formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Book added successfully!');
@@ -131,7 +131,7 @@ const AdminBooks: React.FC = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/admin/books/${bookId}`, {
+      await axios.delete(`http://localhost:5000/api/books/${bookId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Book deleted successfully!');

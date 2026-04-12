@@ -22,10 +22,20 @@ export const addBook = async (req: Request, res: Response) => {
       author,
       isbn,
       description,
-      coverImage,
+      genre,
       totalCopies,
-      categoryId,
     } = req.body;
+
+    // Find or create category
+    let category = await prisma.category.findUnique({
+      where: { name: genre }
+    });
+
+    if (!category) {
+      category = await prisma.category.create({
+        data: { name: genre }
+      });
+    }
 
     const book = await prisma.book.create({
       data: {
@@ -33,10 +43,9 @@ export const addBook = async (req: Request, res: Response) => {
         author,
         isbn,
         description,
-        coverImage,
         totalCopies,
         availableCopies: totalCopies,
-        categoryId,
+        categoryId: category.id,
       },
     });
 
@@ -73,5 +82,47 @@ export const deleteBook = async (req: Request, res: Response) => {
     res.json({ message: "Book deleted" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting book" });
+  }
+};
+
+export const updateBook = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const {
+      title,
+      author,
+      isbn,
+      description,
+      genre,
+      totalCopies,
+    } = req.body;
+
+    // Find or create category
+    let category = await prisma.category.findUnique({
+      where: { name: genre }
+    });
+
+    if (!category) {
+      category = await prisma.category.create({
+        data: { name: genre }
+      });
+    }
+
+    const book = await prisma.book.update({
+      where: { id: Number(id) },
+      data: {
+        title,
+        author,
+        isbn,
+        description,
+        totalCopies,
+        availableCopies: totalCopies, // Assuming available copies update to total
+        categoryId: category.id,
+      },
+    });
+
+    res.json(book);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating book", error });
   }
 };

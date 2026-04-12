@@ -34,7 +34,7 @@ const AdminRequests: React.FC = () => {
   const fetchRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/admin/requests', {
+      const response = await axios.get('http://localhost:5000/api/requests', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRequests(response.data);
@@ -48,7 +48,7 @@ const AdminRequests: React.FC = () => {
   const handleRequestAction = async (requestId: string, action: 'approve' | 'reject') => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5000/api/admin/requests/${requestId}`, {
+      await axios.put(`http://localhost:5000/api/requests/approve/${requestId}`, {
         status: action === 'approve' ? 'approved' : 'rejected'
       }, {
         headers: { Authorization: `Bearer ${token}` }
