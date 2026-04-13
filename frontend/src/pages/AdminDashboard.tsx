@@ -141,9 +141,9 @@ function AdminDashboard(){
             transition={{ delay: 0.2 }}
             className="flex flex-wrap gap-3"
           >
-            <Link to="/admin/books" className="rounded-3xl bg-gradient-to-r from-purple-600 to-violet-600 px-5 py-3 text-white shadow-lg shadow-violet-500/20 transition hover:from-purple-700 hover:to-violet-700">Manage Books</Link>
-            <Link to="/admin/requests" className="rounded-3xl bg-slate-900 text-white px-5 py-3 shadow-lg shadow-slate-900/10 transition hover:bg-slate-800">View Requests</Link>
-            <Link to="/admin/overdue" className="rounded-3xl bg-red-600 text-white px-5 py-3 shadow-lg shadow-red-500/20 transition hover:bg-red-700">Overdue Books</Link>
+            <Link to="/admin/books" className="glass-card rounded-3xl bg-purple-500/20 px-5 py-3 text-white shadow-lg shadow-violet-500/20 transition hover:bg-purple-500/30">Manage Books</Link>
+            <Link to="/admin/requests" className="glass-card rounded-3xl bg-slate-500/20 px-5 py-3 text-white shadow-lg shadow-slate-500/20 transition hover:bg-slate-500/30">View Requests</Link>
+            <Link to="/admin/overdue" className="glass-card rounded-3xl bg-red-500/20 px-5 py-3 text-white shadow-lg shadow-red-500/20 transition hover:bg-red-500/30">Overdue Books</Link>
           </motion.div>
         </div>
 
@@ -154,19 +154,19 @@ function AdminDashboard(){
           transition={{ delay: 0.4 }}
           className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mb-10"
         >
-          <div className="rounded-[32px] bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 p-6 text-white shadow-2xl border border-white/10">
+          <div className="bg-sky-500/40 backdrop-blur-xl rounded-[32px] p-6 text-white shadow-2xl border border-white/15">
             <p className="text-sm uppercase tracking-[0.24em] text-sky-100/80">Total Books</p>
             <p className="mt-4 text-3xl font-semibold">{stats.totalBooks}</p>
           </div>
-          <div className="rounded-[32px] bg-emerald-600 p-6 text-white shadow-2xl border border-white/10">
+          <div className="bg-emerald-500/40 backdrop-blur-xl rounded-[32px] p-6 text-white shadow-2xl border border-white/15">
             <p className="text-sm uppercase tracking-[0.24em] text-emerald-100/80">Users</p>
             <p className="mt-4 text-3xl font-semibold">{stats.totalUsers}</p>
           </div>
-          <div className="rounded-[32px] bg-amber-500 p-6 text-white shadow-2xl border border-white/10">
+          <div className="bg-amber-500/40 backdrop-blur-xl rounded-[32px] p-6 text-white shadow-2xl border border-white/15">
             <p className="text-sm uppercase tracking-[0.24em] text-amber-100/85">Active Borrows</p>
             <p className="mt-4 text-3xl font-semibold">{stats.activeBorrows}</p>
           </div>
-          <div className="rounded-[32px] bg-red-500 p-6 text-white shadow-2xl border border-white/10">
+          <div className="bg-red-500/40 backdrop-blur-xl rounded-[32px] p-6 text-white shadow-2xl border border-white/15">
             <p className="text-sm uppercase tracking-[0.24em] text-red-100/85">Overdue</p>
             <p className="mt-4 text-3xl font-semibold">{stats.overdueBooks}</p>
           </div>
@@ -178,7 +178,7 @@ function AdminDashboard(){
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="overflow-hidden rounded-[32px] border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-6 shadow-[0_15px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+            className="glass-card overflow-hidden rounded-[32px] p-6 shadow-2xl"
           >
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
@@ -197,7 +197,7 @@ function AdminDashboard(){
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="rounded-[32px] border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-6 shadow-[0_15px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+              className="glass-card rounded-[32px] p-6 shadow-2xl"
             >
               <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Quick Actions</h2>
               <p className="mt-3 text-gray-600 dark:text-gray-300">Use these shortcuts to manage your library workflows faster.</p>
@@ -214,7 +214,7 @@ function AdminDashboard(){
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="rounded-[32px] bg-gradient-to-br from-violet-500 to-fuchsia-500 p-6 text-white shadow-2xl border border-white/10"
+              className="bg-violet-500/20 backdrop-blur-xl rounded-[32px] p-6 text-white shadow-2xl border border-white/15"
             >
               <p className="text-sm uppercase tracking-[0.24em] text-white/80">Admin tip</p>
               <p className="mt-4 text-lg font-semibold">Keep overdue requests visible to improve turnaround and reduce borrower follow-ups.</p>
