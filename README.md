@@ -14,8 +14,6 @@
 
 *A modern, full-featured library management system built for institutions and avid readers alike.*
 
-[Live Demo](#) · [Report Bug](https://github.com/kartikgarg146/Libronexa-Smart-Library-Management-Platform/issues) · [Request Feature](https://github.com/kartikgarg146/Libronexa-Smart-Library-Management-Platform/issues)
-
 </div>
 
 ---
@@ -147,28 +145,6 @@ npm run dev
 ```
 
 The app will be live at **http://localhost:5173**
-
----
-
-## 🖥️ Available Scripts
-
-### Frontend
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
-
-### Backend
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start backend with hot-reload |
-| `npm run build` | Compile TypeScript |
-| `npm start` | Run compiled production server |
-| `npx prisma studio` | Open Prisma DB browser |
 
 ---
 
